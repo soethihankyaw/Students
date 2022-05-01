@@ -16,9 +16,7 @@ import lombok.Setter;
 public class Course {
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(strategy = "uuid2", name = "uuid")
-	@Column(name = "code")
+	@Column(name = "code",nullable = false)
 	private String code;
 	private String name;
 	private int hours;
@@ -31,8 +29,9 @@ public class Course {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Course(String name, int hours, String level, int onlineFees, int offlineFees) {
+	public Course(String code,String name, int hours, String level, int onlineFees, int offlineFees) {
 		super();
+		this.code = code;
 		this.name = name;
 		this.hours = hours;
 		this.level = level;

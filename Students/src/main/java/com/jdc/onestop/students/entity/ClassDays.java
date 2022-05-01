@@ -4,11 +4,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,12 +16,22 @@ import lombok.Setter;
 public class ClassDays {
 	
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(strategy = "uuid2", name = "uuid")
-	@Column(name = "days_of_week")
+	@Column(name = "days_of_week", nullable = false)
 	private String daysOfWeek;
 	@ManyToOne
 	private List<Class> classes;
+	
+	public ClassDays() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ClassDays(String daysOfWeek) {
+		super();
+		this.daysOfWeek = daysOfWeek;
+	}
+	
+	
 	
 	
 }

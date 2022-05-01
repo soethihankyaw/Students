@@ -19,9 +19,7 @@ import lombok.Setter;
 public class Payments {
 
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@GenericGenerator(strategy = "uuid2", name = "uuid")
-	@Column(name = "paid_date")
+	@Column(name = "paid_date",nullable = false)
 	private int paidDate;
 	private int toPaid;
 	private int paidAmount;
@@ -33,8 +31,9 @@ public class Payments {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Payments(int toPaid, int paidAmount) {
+	public Payments(int paidDate,int toPaid, int paidAmount) {
 		super();
+		this.paidDate = paidDate;
 		this.toPaid = toPaid;
 		this.paidAmount = paidAmount;
 	}
