@@ -1,14 +1,13 @@
 package com.jdc.onestop.students.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;	
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +15,12 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class Registration {
+public class Registration implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@EmbeddedId	
+	private RegistrationId registrationId;
 	private Date registerDate;
 	private String status;
 	private int fees;
@@ -28,22 +28,28 @@ public class Registration {
 	private int paid;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Set<Student> studentId;
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Set<Class> classId;
+	private Student student;
+	@OneToOne
+	private Class classs;
 
 	public Registration() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Registration(Date registerDate, String status, int fees, int discount, int paid) {
+	public Registration(RegistrationId registrationId, Date registerDate, String status, int fees, int discount,
+			int paid, Student student, Class classs) {
 		super();
+		this.registrationId = registrationId;
 		this.registerDate = registerDate;
 		this.status = status;
 		this.fees = fees;
 		this.discount = discount;
 		this.paid = paid;
+		this.student = student;
+		this.classs = classs;
 	}
+
+	
 
 }

@@ -1,5 +1,6 @@
 package com.jdc.onestop.students.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -13,7 +14,9 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Account {
+public class Account implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

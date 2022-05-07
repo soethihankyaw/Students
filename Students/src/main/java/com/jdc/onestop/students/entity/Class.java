@@ -1,10 +1,11 @@
 package com.jdc.onestop.students.entity;
 
+import java.io.Serializable;
 import java.sql.Time;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,29 +18,33 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class Class {
+public class Class implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String classtype;
+	private Integer classId;
+	@Embedded
+	private CourseCodeAndTeacherId courseCodeAndTeacherId;
+	private String classType;
 	private String startDate;
 	private String months;
 	private Time timeFrom;
 	private Time timeTo;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Set<Course> courseCode;
+	private Course course;
 	@ManyToOne(cascade = CascadeType.PERSIST)
-	private List<Employee> teacherId;
+	private Employee teacher;
 
 	public Class() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Class(String classtype, String startDate, String months, Time timeFrom, Time timeTo) {
+	public Class(String classType, String startDate, String months, Time timeFrom, Time timeTo) {
 		super();
-		this.classtype = classtype;
+		this.classType = classType;
 		this.startDate = startDate;
 		this.months = months;
 		this.timeFrom = timeFrom;

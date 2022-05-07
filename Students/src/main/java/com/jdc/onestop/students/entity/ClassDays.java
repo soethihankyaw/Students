@@ -1,5 +1,6 @@
 package com.jdc.onestop.students.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,13 +14,14 @@ import lombok.Setter;
 @Entity
 @Setter
 @Getter
-public class ClassDays {
+public class ClassDays implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "days_of_week", nullable = false)
 	private String daysOfWeek;
 	@ManyToOne
-	private List<Class> classes;
+	private Class classes;
 	
 	public ClassDays() {
 		super();
